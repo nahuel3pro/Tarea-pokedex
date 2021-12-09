@@ -6,6 +6,10 @@ img{
     max-width: 100%;
 }
 
+#pokemon-img{
+    width: 50%;
+}
+
 #siguiente{
     transform: rotate(90deg);
 }
@@ -41,7 +45,7 @@ h3,h2{
     background-color: #EF3E33;
 }
 
-.mygrid{
+#mygrid{
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr 1fr; 
     grid-template-rows: 1fr 1fr 1fr; 
@@ -50,6 +54,7 @@ h3,h2{
       ". . . ."
       ". . . ."
       ". . . ."; 
+    z-index: 0;
 }
 
 #buscar{

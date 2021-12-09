@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/popup.css">
 </head>
 
 <body class="container-fluid" style="
@@ -30,14 +31,49 @@
         <img src="static/img/logo.png" alt="logo">
     </header>
 
-    <form class="form-inline my-2 my-lg-0 d-flex justify-content-center flex-row-reverse d-none" id="barrabusqueda">
-        <input class="form-control mr-sm-2" type="search" placeholder="Buscar Pokemón" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="buscar">Buscar</button>
-    </form>
+    <div class="d-flex justify-content-center">
+        <form class="form-inline my-2 my-lg-0 d-flex justify-content-center flex-row-reverse d-none gap-1" id="barrabusqueda"
+            style="max-width: 50%;">
+            <input name="pokemon" class="form-control mr-sm-2" type="search" placeholder="Buscar Pokemón" aria-label="Search">
+            <button name="buscar" class="btn btn-outline-success my-2 my-sm-0" type="submit" id="buscar">Buscar</button>
+        </form>
 
-    <div class="poke_box d-none" id="pokepelota">
-        <div class="pokeball">
-            <div class="pokeball__button"></div>
+        <div class="poke_box d-block d-none" id="pokepelota" style="z-index: 1;">
+            <div class="pokeball">
+                <div class="pokeball__button"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PopUp -->
+
+    <div id="popup1" class="overlay" style="
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1;
+                                        ">
+        <div class="popup d-none" id="popup">
+            <h2 id="pokemon-name" class="text-center d-flex align-items-center justify-content-center"></h2>
+            <a class="close" href="javascript:void(0)" id="close">&times;</a>
+            <div class="content d-flex justify-content-center">
+                <img src="" alt="foto del pokemon" id="pokemon-img">
+            </div>
+
+            <div id="info">
+                <h3 class="d-flex justify-content-center align-items-center">Tipo: <span id="tipo"> </span></h3>
+                <h3 class="d-flex justify-content-center align-items-center">Vida: <span id="vida"> </span></h3>
+                <h3 class="d-flex justify-content-center align-items-center">Ataque: <span id="ataque"> </span></h3>
+                <h3 class="d-flex justify-content-center align-items-center">Defensa: <span id="defensa"> </span></h3>
+            </div>
+
         </div>
     </div>
 
@@ -58,13 +94,13 @@
 
         <div>
             <a href="">
-            <img src="static/img/arrow.png" alt="anterior" class="direccion d-none" id="anterior">
+                <img src="static/img/arrow.png" alt="anterior" class="direccion d-none" id="anterior">
             </a>
         </div>
 
         <div>
             <a href="">
-            <img src="static/img/arrow.png" alt="siguiente" class="direccion d-none" id="siguiente"> 
+                <img src="static/img/arrow.png" alt="siguiente" class="direccion d-none" id="siguiente">
             </a>
         </div>
     </div>
