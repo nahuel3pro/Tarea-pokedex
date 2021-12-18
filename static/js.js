@@ -3,7 +3,7 @@ const $pokepelota = document.querySelector('#pokepelota');
 const $popup = document.querySelector('#popup1');
 const $siguiente = document.querySelector('#siguiente');
 const $anterior = document.querySelector('#anterior');
-const $first = document.querySelector('#first');
+const $inicio = document.querySelector('#first');
 const $logo = document.querySelector('#logo');
 const $barra = document.querySelector('#barrabusqueda');
 const $form = document.querySelector('#barrabusqueda');
@@ -32,12 +32,10 @@ function mostrarPopup() {
     $popup.style.visibility = 'visible';
 }
 
-function escondeElementosParaPopup(){
+function abilitarPopup(){
     esconder($pokepelota);
     mostrar($grid);
-    mostrar($anterior);
-    mostrar($first);
-    mostrar($siguiente);
+    manejarFlechas();
 }
 
 function mostrarCartasyPagina() {
@@ -51,21 +49,21 @@ function mostrarCartasyPagina() {
 
 function manejarFlechas() {
     if (pagina === 0) {
-        esconder($first);
+        esconder($inicio);
         mostrar($siguiente);
         esconder($anterior);
     } else {
-        mostrar($first);
+        mostrar($inicio);
         mostrar($siguiente);
         mostrar($anterior);
     }
 }
 
 
-function addPokemonToPage(value, index) {
-    document.querySelectorAll('.pokemon-nombre')[index].innerHTML = `
+function addPokemonToPage(valor, indice) {
+    document.querySelectorAll('.pokemon-nombre')[indice].innerHTML = `
     <a href="javascript:void(0)">
-    ${resultados[value].name.charAt(0).toUpperCase() + resultados[value].name.slice(1)}
+    ${resultados[valor].name.charAt(0).toUpperCase() + resultados[valor].name.slice(1)}
     </a>
     `
 }
@@ -75,7 +73,7 @@ function esconderPagina() {
     esconder($logo);
     esconder($siguiente);
     esconder($anterior);
-    esconder($first);
+    esconder($inicio);
     esconder($barra);
     esconder($grid);
 }
@@ -87,25 +85,25 @@ function buscarPokemon(pokemon) {
             rellenarPopup(pokemonAPIresponseJSON);
             document.querySelector('#popup').classList.remove('d-none');
             
-            escondeElementosParaPopup();
+            abilitarPopup();
         })
         .catch(() => {
             alert('No se pudo encontrar ese pokemon, intente nuevamente')
             esconderPopup();
-            escondeElementosParaPopup();
+            abilitarPopup();
         });
 
     esconder($grid);
     esconder($anterior);
-    esconder($first);
+    esconder($inicio);
     esconder($siguiente);
     mostrar($pokepelota);
     document.querySelector('#popup').classList.add('d-none');
     mostrarPopup();
 }
 
-function agarrarPokemonesEnOrden() {
-    fetch(URL + `pokemon?limit=${CANTIDAD_DE_CARTAS}&offset=${pagina}`)
+function traerPokemones(limite, desplazamiento) {
+    fetch(URL + `pokemon?limit=${limite}&offset=${desplazamiento}`)
         .then(pokemonAPIresponse => pokemonAPIresponse.json())
         .then(pokemonAPIresponseJSON => {
             resultados = pokemonAPIresponseJSON.results;
@@ -161,7 +159,7 @@ function crearCartitas() {
 
 
 crearCartitas();
-agarrarPokemonesEnOrden();
+traerPokemones(CANTIDAD_DE_CARTAS, pagina);
 
 
 $siguiente.onclick = function (e) {
@@ -169,7 +167,7 @@ $siguiente.onclick = function (e) {
     pagina += CANTIDAD_DE_CARTAS
 
     esconderPagina();
-    agarrarPokemonesEnOrden();
+    traerPokemones(CANTIDAD_DE_CARTAS, pagina);
 
     e.preventDefault();
 }
@@ -179,7 +177,7 @@ $anterior.onclick = function (e) {
     pagina -= CANTIDAD_DE_CARTAS;
 
     esconderPagina();
-    agarrarPokemonesEnOrden();
+    traerPokemones(CANTIDAD_DE_CARTAS, pagina);
 
     e.preventDefault();
 }
