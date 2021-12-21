@@ -33,8 +33,9 @@ function mostrarPopup() {
   $popup2.style.visibility = 'visible';
 }
 
-function manejarFlechas() {
-  if (pagina === 0) {
+function manejarFlechas(paginaActual) {
+  console.log(paginaActual);
+  if (paginaActual === 0) {
     esconder($inicio);
     mostrar($siguiente);
     esconder($anterior);
@@ -123,7 +124,7 @@ function traerPokemones(limite, desplazamiento) {
       esconder($pokepelota);
       mostrarCartasyPagina();
 
-      manejarFlechas();
+      manejarFlechas(desplazamiento / CANTIDAD_DE_CARTAS);
     })
     .catch(() => alert('Hubo un error, intente nuevamente o más tarde.'));
 
