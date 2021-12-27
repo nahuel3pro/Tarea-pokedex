@@ -1,0 +1,10 @@
+export const $grid = document.querySelector('#mygrid');
+export const $pokepelota = document.querySelector('#pokepelota');
+export const $popup2 = document.querySelector('#popup2');
+export const $siguiente = document.querySelector('#siguiente');
+export const $anterior = document.querySelector('#anterior');
+export const $inicio = document.querySelector('#first');
+export const $logo = document.querySelector('#logo');
+export const $barra = document.querySelector('#barrabusqueda');
+export const $popup = document.querySelector('#popup');
+export const $form = document.querySelector('#barrabusqueda');
