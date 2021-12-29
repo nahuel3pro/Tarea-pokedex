@@ -80,7 +80,7 @@ export function cargando() {
 
 export function addPokemonToPage(valor, indice, resultados) {
   document.querySelectorAll('.pokemon-nombre')[indice].innerHTML = `
-      <a href="javascript:void(0)">
+      <a href="javascript:void(0)" class="pokemon-nombre2" data-nombre=${resultados[valor].name}>
       ${resultados[valor].name.charAt(0).toUpperCase() + resultados[valor].name.slice(1)}
       </a>
       `;

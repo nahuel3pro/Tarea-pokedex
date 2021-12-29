@@ -27,8 +27,7 @@ $anterior.onclick = (e) => {
 document.querySelectorAll('.pokemon-nombre').forEach((value) => {
   const elementos = value;
   elementos.onclick = (e) => {
-    let pokemon = e.currentTarget.textContent.replace(/\s/g, '');
-    pokemon = pokemon.toLowerCase();
+    const pokemon = e.explicitOriginalTarget.dataset.nombre;
 
     agarrarPokemonPorNombre(pokemon);
   };
