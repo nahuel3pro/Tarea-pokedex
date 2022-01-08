@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import { pokemonesOrden } from './static/src/coneccion.js';
+import { pokemonesOrden } from './src/coneccion.js';
 
 import {
   crearCartitas,
@@ -7,11 +7,11 @@ import {
   esconder,
   mostrarCartasyPagina,
   mostrar,
-} from './static/src/ui.js';
+} from './src/ui.js';
 
-import { $pokepelota } from './static/src/elementos.js';
+import { $pokepelota } from './src/elementos.js';
 
-import { CANTIDAD_DE_CARTAS } from './static/src/constantes.js';
+import { CANTIDAD_DE_CARTAS } from './src/constantes.js';
 
 async function inicializar() {
   mostrar($pokepelota);
