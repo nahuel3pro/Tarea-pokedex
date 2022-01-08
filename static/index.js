@@ -13,6 +13,8 @@ import { $pokepelota } from './src/elementos.js';
 
 import { CANTIDAD_DE_CARTAS } from './src/constantes.js';
 
+console.log('Pokedex con módulos');
+
 async function inicializar() {
   mostrar($pokepelota);
 
