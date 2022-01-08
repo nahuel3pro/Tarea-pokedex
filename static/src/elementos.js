@@ -8,3 +8,4 @@ export const $logo = document.querySelector('#logo');
 export const $barra = document.querySelector('#barrabusqueda');
 export const $popup = document.querySelector('#popup');
 export const $form = document.querySelector('#barrabusqueda');
+export const $cerrar = document.querySelector('#close');

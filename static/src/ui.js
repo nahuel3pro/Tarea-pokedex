@@ -1,92 +1,11 @@
+/* eslint-disable no-alert */
 /* eslint-disable import/extensions */
-import {
-  $grid,
-  $pokepelota,
-  $popup2,
-  $siguiente,
-  $anterior,
-  $inicio,
-  $logo,
-  $barra,
-  $popup,
-  //   $form,
-} from './elementos.js';
-
+/* eslint-disable import/prefer-default-export */
+import * as $elementohtml from './elementos.js';
+import { buscarPokemon, pokemonesOrden } from './coneccion.js';
 import { CANTIDAD_DE_CARTAS } from './constantes.js';
 
-export function esconder($element) {
-  $element.classList.add('d-none');
-}
-
-export function mostrar($element) {
-  $element.classList.remove('d-none');
-}
-
-export function esconderPopup() {
-  $popup2.style.opacity = 0;
-  $popup2.style.visibility = 'hidden';
-}
-
-export function mostrarPopup() {
-  $popup2.style.opacity = 1;
-  $popup2.style.visibility = 'visible';
-}
-
-export function manejarFlechas(paginaActual) {
-  if (paginaActual === 0) {
-    esconder($inicio);
-    mostrar($siguiente);
-    esconder($anterior);
-  } else {
-    mostrar($inicio);
-    mostrar($siguiente);
-    mostrar($anterior);
-  }
-}
-
-export function abilitarPopup() {
-  esconder($pokepelota);
-  mostrar($grid);
-  manejarFlechas();
-}
-
-export function mostrarCartasyPagina() {
-  mostrar($grid);
-
-  document.querySelector('body').style.removeProperty('display');
-
-  mostrar($barra);
-  mostrar($logo);
-}
-
-export function esconderPagina() {
-  esconder($logo);
-  esconder($siguiente);
-  esconder($anterior);
-  esconder($inicio);
-  esconder($barra);
-  esconder($grid);
-}
-
-export function cargando() {
-  esconder($grid);
-  esconder($anterior);
-  esconder($inicio);
-  esconder($siguiente);
-  mostrar($pokepelota);
-  esconder($popup);
-  mostrarPopup();
-}
-
-export function addPokemonToPage(valor, indice, resultados) {
-  document.querySelectorAll('.pokemon-nombre')[indice].innerHTML = `
-      <a href="javascript:void(0)" class="pokemon-nombre2" data-nombre=${resultados[valor].name}>
-      ${resultados[valor].name.charAt(0).toUpperCase() + resultados[valor].name.slice(1)}
-      </a>
-      `;
-}
-
-export function rellenarPopup(pokemon) {
+function rellenarPopup(pokemon) {
   document.querySelector('#pokemon-name').textContent = pokemon.forms[0].name.toUpperCase();
   document.querySelector('#pokemon-img').src = pokemon.sprites.other['official-artwork'].front_default;
   document.querySelector('#tipo').textContent = pokemon.types[0].type.name;
@@ -95,15 +14,134 @@ export function rellenarPopup(pokemon) {
   document.querySelector('#defensa').textContent = pokemon.stats[2].base_stat;
 }
 
+function mostrarPopup() {
+  $elementohtml.$popup2.style.opacity = 1;
+  $elementohtml.$popup2.style.visibility = 'visible';
+}
+
+export function esconder($elemento) {
+  $elemento.classList.add('d-none');
+}
+
+export function mostrar($elemento) {
+  $elemento.classList.remove('d-none');
+}
+
+export function manejarFlechas(paginaActual) {
+  if (paginaActual === 0) {
+    esconder($elementohtml.$inicio);
+    mostrar($elementohtml.$siguiente);
+    esconder($elementohtml.$anterior);
+  } else {
+    mostrar($elementohtml.$inicio);
+    mostrar($elementohtml.$siguiente);
+    mostrar($elementohtml.$anterior);
+  }
+}
+
+// function prepararPopUp() {
+//   esconder($elementohtml.$grid);
+//   esconder($elementohtml.$anterior);
+//   esconder($elementohtml.$inicio);
+//   esconder($elementohtml.$siguiente);
+//   mostrar($elementohtml.$pokepelota);
+//   esconder($elementohtml.$popup);
+//   mostrarPopup();
+// }
+
+// function abilitarPopup() {
+//   esconder($elementohtml.$pokepelota);
+//   mostrar($elementohtml.$grid);
+// //   manejarFlechas();
+// }
+
+export function esconderPopup() {
+  $elementohtml.$popup2.style.opacity = 0;
+  $elementohtml.$popup2.style.visibility = 'hidden';
+}
+
+export function mostrarCartasyPagina() {
+  mostrar($elementohtml.$grid);
+
+  document.querySelector('body').style.removeProperty('display');
+
+  mostrar($elementohtml.$barra);
+  mostrar($elementohtml.$logo);
+}
+
 export function crearCartitas() {
   for (let i = 0; i < CANTIDAD_DE_CARTAS; i += 1) {
-    $grid.innerHTML += (`
-          
-          <div class="card bg border border-5">
-              <img src="static/img/pokepelota.png" alt="pokeball">
-              <h2 class="card p-1 text-center pokemon-nombre justify-content-center"></h2>
-          </div>
-          
-          `);
+    $elementohtml.$grid.innerHTML += (`
+        <div class="card bg border border-5">
+            <img src="static/img/pokepelota.png" alt="pokeball">
+            <h2 class="card p-1 text-center pokemon-nombre justify-content-center"></h2>
+        </div>
+        `);
+  }
+}
+
+export function addPokemonToPage(index, resultados) {
+  document.querySelectorAll('.pokemon-nombre')[index].innerHTML = `
+      <a href="javascript:void(0)" data-pokemon="${resultados[index].name}" class="nombre-pokemon">
+      ${resultados[index].name.charAt(0).toUpperCase() + resultados[index].name.slice(1)}
+      </a>
+      `;
+}
+
+export async function obtenerPokemonyMostrarlo(pokemon) {
+  esconder($elementohtml.$popup);
+  mostrarPopup();
+  try {
+    const pokemonInfo = await buscarPokemon(pokemon);
+
+    rellenarPopup(pokemonInfo);
+    mostrar($elementohtml.$popup);
+  } catch (error) {
+    alert('No se puede mostrar el pokemon en este momento');
+    esconderPopup();
+  }
+}
+
+// export async function buscarPokemonyMostrarlo(pokemon) {
+//   prepararPopUp();
+
+//   try {
+//     const pokemonInfo = await buscarPokemon(pokemon);
+
+//     rellenarPopup(pokemonInfo);
+//     mostrar($elementohtml.$popup);
+//   } catch (error) {
+//     alert('El pokemon que se intenta buscar no existe');
+//     esconderPopup();
+//   }
+
+//   abilitarPopup();
+// }
+
+export function esconderPagina() {
+  esconder($elementohtml.$logo);
+  esconder($elementohtml.$siguiente);
+  esconder($elementohtml.$anterior);
+  esconder($elementohtml.$inicio);
+  esconder($elementohtml.$barra);
+  esconder($elementohtml.$grid);
+}
+
+export async function actualizarPagina(pagina) {
+  mostrar($elementohtml.$pokepelota);
+
+  try {
+    const pokemonLista = await pokemonesOrden(CANTIDAD_DE_CARTAS, pagina);
+
+    Object.keys(pokemonLista).forEach((value) => {
+      addPokemonToPage(value, pokemonLista);
+    });
+
+    esconder($elementohtml.$pokepelota);
+    mostrarCartasyPagina();
+
+    manejarFlechas(pagina / CANTIDAD_DE_CARTAS);
+  } catch {
+    alert('Hubo un error, intente nuevamente o más tarde.');
   }
 }

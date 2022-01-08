@@ -1,7 +1,19 @@
 /* eslint-disable import/extensions */
-import { $form, $siguiente, $anterior } from './elementos.js';
-import { esconderPagina, esconderPopup, manejarFlechas } from './ui.js';
-import { agarrarPokemonPorNombre, traerPokemones, buscarPokemon } from './coneccionApi.js';
+import {
+  $siguiente,
+  $cerrar,
+  $form,
+  $anterior,
+} from './elementos.js';
+
+import {
+  obtenerPokemonyMostrarlo,
+  esconderPopup,
+  esconderPagina,
+  actualizarPagina,
+  manejarFlechas,
+} from './ui.js';
+
 import { CANTIDAD_DE_CARTAS } from './constantes.js';
 
 let pagina = 0;
@@ -10,7 +22,7 @@ $siguiente.onclick = (e) => {
   pagina += CANTIDAD_DE_CARTAS;
 
   esconderPagina();
-  traerPokemones(CANTIDAD_DE_CARTAS, pagina);
+  actualizarPagina(pagina);
 
   e.preventDefault();
 };
@@ -19,7 +31,7 @@ $anterior.onclick = (e) => {
   pagina -= CANTIDAD_DE_CARTAS;
 
   esconderPagina();
-  traerPokemones(CANTIDAD_DE_CARTAS, pagina);
+  actualizarPagina(pagina);
 
   e.preventDefault();
 };
@@ -27,19 +39,18 @@ $anterior.onclick = (e) => {
 document.querySelectorAll('.pokemon-nombre').forEach((value) => {
   const elementos = value;
   elementos.onclick = (e) => {
-    const pokemon = e.explicitOriginalTarget.dataset.nombre;
-
-    agarrarPokemonPorNombre(pokemon);
+    const nombrePokemon = e.target.dataset.pokemon || e.target.lastElementChild.dataset.pokemon;
+    obtenerPokemonyMostrarlo(nombrePokemon);
   };
 });
 
-document.querySelector('#close').onclick = () => {
+$cerrar.onclick = () => {
   esconderPopup();
-  manejarFlechas(pagina);
 };
 
 $form.buscar.onclick = (e) => {
-  buscarPokemon($form.pokemon.value.toLowerCase());
+  obtenerPokemonyMostrarlo($form.pokemon.value.toLowerCase());
 
+  manejarFlechas(pagina / CANTIDAD_DE_CARTAS);
   e.preventDefault();
 };
