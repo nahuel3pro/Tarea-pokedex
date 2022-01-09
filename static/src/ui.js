@@ -127,18 +127,22 @@ export function esconderPagina() {
   esconder($elementohtml.$grid);
 }
 
+export function llenarPagina(pokelista) {
+  Object.keys(pokelista).forEach((index) => {
+    addPokemonToPage(index, pokelista);
+  });
+
+  esconder($elementohtml.$pokepelota);
+  mostrarCartasyPagina();
+}
+
 export async function actualizarPagina(pagina) {
   mostrar($elementohtml.$pokepelota);
 
   try {
     const pokemonLista = await pokemonesOrden(CANTIDAD_DE_CARTAS, pagina);
 
-    Object.keys(pokemonLista).forEach((value) => {
-      addPokemonToPage(value, pokemonLista);
-    });
-
-    esconder($elementohtml.$pokepelota);
-    mostrarCartasyPagina();
+    llenarPagina(pokemonLista);
 
     manejarFlechas(pagina / CANTIDAD_DE_CARTAS);
   } catch {
