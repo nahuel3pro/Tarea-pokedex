@@ -45,7 +45,7 @@ h3,h2{
     background-color: #EF3E33;
 }
 
-#mygrid{
+#grid{
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr 1fr; 
     grid-template-rows: 1fr 1fr 1fr; 

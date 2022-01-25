@@ -2,8 +2,8 @@
 import {
   $siguiente,
   $cerrar,
-  $form,
   $anterior,
+  $barraBusqueda,
 } from './elementos.js';
 
 import {
@@ -48,8 +48,8 @@ $cerrar.onclick = () => {
   esconderPopup();
 };
 
-$form.buscar.onclick = (e) => {
-  obtenerPokemonyMostrarlo($form.pokemon.value.toLowerCase());
+$barraBusqueda.buscar.onclick = (e) => {
+  obtenerPokemonyMostrarlo($barraBusqueda.pokemon.value.toLowerCase());
 
   manejarFlechas(pagina / CANTIDAD_DE_CARTAS);
   e.preventDefault();

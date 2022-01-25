@@ -1,11 +1,10 @@
-export const $grid = document.querySelector('#mygrid');
+export const $grid = document.querySelector('#grid');
 export const $pokepelota = document.querySelector('#pokepelota');
-export const $popup2 = document.querySelector('#popup2');
+export const $fondoNegro = document.querySelector('#fondo-negro');
 export const $siguiente = document.querySelector('#siguiente');
-export const $anterior = document.querySelector('#anterior');
-export const $inicio = document.querySelector('#first');
-export const $logo = document.querySelector('#logo');
-export const $barra = document.querySelector('#barrabusqueda');
 export const $popup = document.querySelector('#popup');
-export const $form = document.querySelector('#barrabusqueda');
+export const $anterior = document.querySelector('#anterior');
+export const $inicio = document.querySelector('#primera-pagina');
+export const $logo = document.querySelector('#logo');
+export const $barraBusqueda = document.querySelector('#barra-de-busqueda');
 export const $cerrar = document.querySelector('#close');
