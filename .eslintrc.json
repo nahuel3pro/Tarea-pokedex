@@ -11,6 +11,9 @@
         "sourceType": "module"
     },
     "rules": {
+
+        "no-alert": "off",
+
         "import/extensions": [
             "error",
             "ignorePackages",

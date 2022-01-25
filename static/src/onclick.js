@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import {
   $siguiente,
   $cerrar,
