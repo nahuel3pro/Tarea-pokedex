@@ -1,5 +1,5 @@
 import * as $elementoHtml from './elementos.js';
-import { obtenerPokemon, obtenerListaPokemones } from './pokeAPI.js';
+import { obtenerPokemon, obtenerListaPokemones } from './pokeAPIconeccion.js';
 import { CANTIDAD_DE_CARTAS } from './constantes.js';
 
 function rellenarPopup(pokemon) {

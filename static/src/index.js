@@ -1,4 +1,4 @@
-import { obtenerListaPokemones } from './pokeAPI.js';
+import { obtenerListaPokemones } from './pokeAPIconeccion.js';
 
 import {
   crearCartitas,
