@@ -1,4 +1,4 @@
-import { pokemonesOrden } from './pokeAPI.js';
+import { obtenerListaPokemones } from './pokeAPI.js';
 
 import {
   crearCartitas,
@@ -13,7 +13,7 @@ import { CANTIDAD_DE_CARTAS } from './constantes.js';
 async function inicializar() {
   mostrar($pokepelota);
   crearCartitas();
-  const pokemonLista = await pokemonesOrden(CANTIDAD_DE_CARTAS, 0);
+  const pokemonLista = await obtenerListaPokemones(CANTIDAD_DE_CARTAS, 0);
   llenarPagina(pokemonLista);
 }
 

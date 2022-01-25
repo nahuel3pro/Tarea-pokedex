@@ -1,5 +1,5 @@
 import * as $elementoHtml from './elementos.js';
-import { buscarPokemon, pokemonesOrden } from './pokeAPI.js';
+import { obtenerPokemon, obtenerListaPokemones } from './pokeAPI.js';
 import { CANTIDAD_DE_CARTAS } from './constantes.js';
 
 function rellenarPopup(pokemon) {
@@ -12,8 +12,8 @@ function rellenarPopup(pokemon) {
 }
 
 function mostrarPopup() {
-  $elementoHtml.$fondo_negro.style.opacity = 1;
-  $elementoHtml.$fondo_negro.style.visibility = 'visible';
+  $elementoHtml.$fondoNegro.style.opacity = 1;
+  $elementoHtml.$fondoNegro.style.visibility = 'visible';
 }
 
 export function esconder($elemento) {
@@ -37,8 +37,8 @@ export function manejarFlechas(paginaActual) {
 }
 
 export function esconderPopup() {
-  $elementoHtml.$fondo_negro.style.opacity = 0;
-  $elementoHtml.$fondo_negro.style.visibility = 'hidden';
+  $elementoHtml.$fondoNegro.style.opacity = 0;
+  $elementoHtml.$fondoNegro.style.visibility = 'hidden';
 }
 
 export function mostrarCartasyPagina() {
@@ -46,7 +46,7 @@ export function mostrarCartasyPagina() {
 
   document.querySelector('body').style.removeProperty('display');
 
-  mostrar($elementoHtml.$barra_busqueda);
+  mostrar($elementoHtml.$barraBusqueda);
   mostrar($elementoHtml.$logo);
 }
 
@@ -73,7 +73,7 @@ export async function obtenerPokemonyMostrarlo(pokemon) {
   esconder($elementoHtml.$popup);
   mostrarPopup();
   try {
-    const pokemonInfo = await buscarPokemon(pokemon);
+    const pokemonInfo = await obtenerPokemon(pokemon);
 
     rellenarPopup(pokemonInfo);
     mostrar($elementoHtml.$popup);
@@ -88,7 +88,7 @@ export function esconderPagina() {
   esconder($elementoHtml.$siguiente);
   esconder($elementoHtml.$anterior);
   esconder($elementoHtml.$inicio);
-  esconder($elementoHtml.$barra_busqueda);
+  esconder($elementoHtml.$barraBusqueda);
   esconder($elementoHtml.$grid);
 }
 
@@ -105,7 +105,7 @@ export async function actualizarPagina(pagina) {
   mostrar($elementoHtml.$pokepelota);
 
   try {
-    const pokemonLista = await pokemonesOrden(CANTIDAD_DE_CARTAS, pagina);
+    const pokemonLista = await obtenerListaPokemones(CANTIDAD_DE_CARTAS, pagina);
 
     llenarPagina(pokemonLista);
 
