@@ -7,15 +7,8 @@ function obtenerPokemon(pokemon) {
 
 function obtenerListaPokemones(limit, offset) {
   return fetch(`${URL}pokemon?limit=${limit}&offset=${offset}`)
-    .then((r) => r.json()).then((r) => r.results);
+    .then((r) => r.json())
+    .then((r) => r.results);
 }
-
-// function buscarPokemon(pokemon) {
-//   return obtenerPokemon(pokemon).then((r) => r.json());
-// }
-
-// function pokemonesOrden(limit, offset) {
-//   return obtenerPokemones(limit, offset).then((r) => r.json()).then((r) => r.results);
-// }
 
 export { obtenerPokemon, obtenerListaPokemones };
